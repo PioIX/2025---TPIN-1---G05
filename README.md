@@ -65,7 +65,7 @@ https://www.canva.com/design/DAGopN50HzQ/pbv-JQ0I4dRVu_lAJV66uw/view?utm_content
 
 ### Diagrama de flujo
 https://app.chartdb.io/d/90faa6882525
-![Diagrama de flujo.]()
+![Diagrama de flujo.](./front/img/Diagrama de flujo.PNG)
 
 ### Diagrama Gantt
 https://drive.google.com/file/d/18tynA_7MU5nwLDduG0qf7FWICn2heCwa/view
