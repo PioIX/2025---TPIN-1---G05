@@ -64,11 +64,6 @@ app.get('/usersRanking', async function (req, res) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
     }
 })
-
-
-
-
-
 //PEDIDOS BACK DE PELICULAS
 // titulo, img y la categoria todo por el query; y try catch
 
@@ -100,7 +95,7 @@ app.delete('/borrarPeliculas', async function (req, res) {
 
 app.post('/insertarPeliculas', async function (req, res) {
     try {
-        let check = await realizarQuery(`SELECT * FROM Peliculas WHERE titulo = "${req.body.titulo}" AND voto_espectadores = ${req.body.voto_espectadores} AND ganancia = ${req.body.ganancia} AND link = "${req.body.link}" AND año =${req.body.año}`)
+        let check = await realizarQuery(`SELECT * FROM Peliculas WHERE titulo = "${req.body.titulo}" AND año =${req.body.año}`)
         if (check.length == 0) {
             await realizarQuery(` INSERT INTO Peliculas (titulo, voto_espectadores, ganancia, link, año )
                 VALUES ("${req.body.titulo}", ${req.body.voto_espectadores}, ${req.body.ganancia}, "${req.body.link}", ${req.body.año});`)
@@ -154,7 +149,7 @@ app.listen(port, () => {
 
 
 //GET PUNTAJES
-app.get('/getPuntaje', async function (req,res) {
+app.get('/getPuntaje', async function (req, res) {
     try {
         let respuesta = await realizarQuery(`SELECT * FROM Puntajes ORDER BY puntaje`);
         res.send(respuesta);
@@ -177,27 +172,28 @@ app.post('/insertarPuntaje', async function (req, res) {
         else {
             res.send({ mensaje: "Puntaje ya existe" })
         }
-    } catch(error) {
+    } catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
     }
 });
 
 //PUT PUNTAJES
 app.put('/modificarPuntaje', async function (req, res) {
-    try{
+    try {
         await realizarQuery(`UPDATE Puntajes SET
         puntaje='${req.body.puntaje}' WHERE id_puntaje='${req.body.id_puntaje}'`);
         res.send({ mensaje: "Puntaje modificado correctamente" });
-    }catch(error){
-        res.send({mensaje: "Tuviste un error", error: error.message})}
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message })
+    }
 })
 
 //DELETE PUNTAJES
 app.delete('/borrarPuntaje', function (req, res) {
-    try{
-    realizarQuery(`DELETE FROM Puntajes WHERE id_puntaje = '${req.body.id_puntaje}'`)
+    try {
+        realizarQuery(`DELETE FROM Puntajes WHERE id_puntaje = '${req.body.id_puntaje}'`)
         res.send({ mensaje: "Puntaje borrado correctamente" });
-    }catch (error) {
+    } catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
     }
 })
@@ -210,5 +206,83 @@ app.get('/getLastMaxPoint', async function (res) {
     }
     catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message });
+    }
+})
+
+/*------------------------------------------------------------------------------------------*/
+/*-------------------------------------ADMINISTRADOR----------------------------------------*/
+/*------------------------------------------------------------------------------------------*/
+
+//USUARIOS
+app.get('/getAllUsers', async function (req, res) {
+    try {
+        respuesta = await realizarQuery(`SELECT username, id_usuario FROM Usuarios`)
+        res.send(respuesta)
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message })
+    }
+})
+
+app.post('/insertUserAdmin', async function (req, res) {
+    try {
+        let check = await realizarQuery(`SELECT username FROM Usuarios WHERE username = "${req.body.username}"`);
+        if (check.length == 0) {
+            await realizarQuery(`INSERT INTO Usuarios (username, password, record) VALUES
+                ("${req.body.username}", "${req.body.password}", ${req.body.record})`)
+            res.send("Usuario agregado")
+        } else {
+            res.send({ res: "No se pudo agregar el usuario, ya existe otro con ese nombre" })
+        };
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message })
+    }
+})
+
+app.put('/changeUser', async function (req, res) {
+    try {
+        await realizarQuery(`UPDATE Usuarios SET username = "${req.body.username}", password = "${req.body.password}", record = ${req.body.record} WHERE id_usuario = "${req.body.id_usuario}"`)
+        res.send("Se ha cambiado el usuario")
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message })
+    }
+})
+
+app.delete('/deleteUser', async function (req, res) {
+    try {
+        await realizarQuery(`DELETE FROM Usuarios WHERE id_usuario = ${req.body.id_usuario}`)
+        res.send("Usuario eliminado correctamente")
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message })
+    }
+})
+
+//PELICULAS
+app.get('/getAllMovies', async function (req, res) {
+    try {
+        respuesta = await realizarQuery(`SELECT titulo, id_pelicula FROM Peliculas`)
+        res.send(respuesta)
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message })
+    }
+})
+
+//PARA EL POST USAR EL MISMO PEDIDO YA CREADO ANTERIORMENTE
+
+app.put('/changeMovie', async function (req, res) {
+    try {
+        await realizarQuery(`UPDATE Peliculas SET titulo = "${req.body.titulo}", voto_espectadores = "${req.body.voto_espectadores}", ganancia = "${req.body.ganancia}", link = "${req.body.link}", año = ${req.body.año} WHERE id_pelicula = "${req.body.id_pelicula}"`)
+        res.send("Se ha cambiado la pelicula")
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message })
+    }
+})
+
+
+app.delete('/deleteMovie', async function (req, res) {
+    try {
+        await realizarQuery(`DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
+        res.send("Pelicula eliminada correctamente")
+    } catch (error) {
+        res.send({ mensaje: "Tuviste un error", error: error.message })
     }
 })

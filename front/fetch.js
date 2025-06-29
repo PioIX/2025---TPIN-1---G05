@@ -72,7 +72,7 @@ async function fetchGetUsersId(username, password) {
         })
         let result = await response.json();
         console.log(result)
-        
+
         return result.res
     } catch (error) {
         alert("Hubo un error: ")
@@ -174,4 +174,20 @@ async function fetchPutRecord(puntaje, id_usuario) {
         alert("Hubo un error: ")
 
     }
+}
+
+async function fetchGetAllMovies() {
+    let opciones = document.getElementById("opcionesPeliculas").innerHTML
+    for (let i = 0; i < opciones.length; i++) {
+        let opciones =`<option value = ${opciones[i].id_pelicula}>"${opciones[i].titulo}"</option>`
+    }
+    document.getElementById("opcionesPeliculas") = opciones
+}
+
+async function fetchGetAllUsers() {
+    let opciones = document.getElementById("opcionesUsuarios").innerHTML
+    for (let i = 0; i < opciones.length; i++) {
+        let opciones =`<option value = ${opciones[i].id_usuario}>"${opciones[i].username}"</option>`
+    }
+    document.getElementById("opcionesUsuarios") = opciones
 }
