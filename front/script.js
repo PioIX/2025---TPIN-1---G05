@@ -100,19 +100,19 @@ async function answer(selecctionAnswer) {//hacer llegar el atributo del boton
         await replaceSelection()
     } else {
         console.log("incorrecto")
-            // let maxPoint = fetchGetRecordPuntaje(id_user)
-            // // Parametro dado ID de user. Parametro a espera Max Points
-            // if (maxPoint < point) {
-            //     maxPoint = point
-            //     await fetchPutRecord(id_user, maxPoint)
-            //     // Parametro dado ID de user y puntos max.
-            // }
-            // let tenPlace = await getLastMaxPoint()//establecer funcion fetch get max puntos 
-            // // Parametro recibe el decimo puesto de la tabla (puntaje)
-            // if (tenPlace < maxPoint) {
-            //     await putPointTabla(id_user, maxPoint)//establecer funcion post max puntos 
-            //     //parametro dado id del user y puntos maximos
-            // }
+        // let maxPoint = fetchGetRecordPuntaje(id_user)
+        // // Parametro dado ID de user. Parametro a espera Max Points
+        // if (maxPoint < point) {
+        //     maxPoint = point
+        //     await fetchPutRecord(id_user, maxPoint)
+        //     // Parametro dado ID de user y puntos max.
+        // }
+        // let tenPlace = await getLastMaxPoint()//establecer funcion fetch get max puntos 
+        // // Parametro recibe el decimo puesto de la tabla (puntaje)
+        // if (tenPlace < maxPoint) {
+        //     await putPointTabla(id_user, maxPoint)//establecer funcion post max puntos 
+        //     //parametro dado id del user y puntos maximos
+        // }
         // await replaceandshowModalFinal(maxPoint, point)
         showModalFinal()
     }
@@ -127,29 +127,36 @@ async function replaceSelection() {
 }
 //Inicio de sesión
 async function register() {
-    let check = await fetchPostInsertUser(getUser(), getPassword())
-    if (check.res[0].id_usuario > 0) {
-        login()
+    if (getUser() == "" || getPassword() == "") {
+        alert("Llene todos los campos para poder continuar")
     } else {
-        alert("Error. Ese usuario ya existe, ingrese uno nuevo")
+        let check = await fetchPostInsertUser(getUser(), getPassword())
+        if (check.res[0].id_usuario > 0) {
+            login()
+        } else {
+            alert("Error. Ese usuario ya existe, ingrese uno nuevo")
+        }
     }
 }
 
 async function login() {
-    let check = await fetchGetUsersId(getUser(), getPassword())
-    if (check[0].id_usuario > 0) {
-        usernameLogued = check[0].username
-        id_user = check[0].id_usuario
-        alert("Iniciando sesion")
-        showModalCuenta()
-        await llenarDatosPersonal(id_user)
-    } else if (check == "0") { //La función hecha en el back de usuarios conseguirá el usuario y la contraseña. Devolverá 0 o -1 si no funciona y el id de usuario si sí funciona
-        alert("Error. No se ha ingresado correctamente la contraseña")
-    } else if (check == "-1") {
-        alert("Error. El usuario ingresado no existe")
+    if (getUser() == "" || getPassword() == "") {
+        alert("Llene todos los campos para poder continuar")
+    } else {
+        let check = await fetchGetUsersId(getUser(), getPassword())
+        if (check[0].id_usuario > 0) {
+            usernameLogued = check[0].username
+            id_user = check[0].id_usuario
+            alert("Iniciando sesion")
+            showModalCuenta()
+            await llenarDatosPersonal(id_user)
+        } else if (check == "0") { //La función hecha en el back de usuarios conseguirá el usuario y la contraseña. Devolverá 0 o -1 si no funciona y el id de usuario si sí funciona
+            alert("Error. No se ha ingresado correctamente la contraseña")
+        } else if (check == "-1") {
+            alert("Error. El usuario ingresado no existe")
+        }
     }
 }
-
 function closeAccount() {
     id_user = -1
     alert("Cerrando sesión")
