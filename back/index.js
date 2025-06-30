@@ -277,12 +277,4 @@ app.put('/changeMovie', async function (req, res) {
     }
 })
 
-
-app.delete('/deleteMovie', async function (req, res) {
-    try {
-        await realizarQuery(`DELETE FROM Peliculas WHERE id_pelicula = ${req.body.id_pelicula}`)
-        res.send("Pelicula eliminada correctamente")
-    } catch (error) {
-        res.send({ mensaje: "Tuviste un error", error: error.message })
-    }
-})
+//PARA EL DELETE USAR EL MISMO PEDIDO YA CREADO ANTERIORMENTE

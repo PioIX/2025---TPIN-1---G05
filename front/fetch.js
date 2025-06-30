@@ -39,7 +39,7 @@ async function fetchPostPeliculas(titulo, voto_espectadores, año, ganancia, lin
     }
 }
 
-async function fetchBorrarPeliculas(id_pelicula) {
+async function fetchBorrarPeliculas(datos) {
     let datos = {
         id_pelicula: id_pelicula
     };
@@ -79,8 +79,6 @@ async function fetchGetUsersId(username, password) {
     }
 
 }
-
-
 
 async function fetchGetUsersRanking() {
     try {
@@ -177,17 +175,143 @@ async function fetchPutRecord(puntaje, id_usuario) {
 }
 
 async function fetchGetAllMovies() {
+    try {
+        response = await fetch(`http://localhost:4000/getAllMovies`, {
+            method: "GET", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        return result
+    } catch (error) {
+        alert("Hubo un error: ")
+    }
+}
+
+async function fetchGetAllUsers() {
+    try {
+        response = await fetch(`http://localhost:4000/getAllUsers`, {
+            method: "GET", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        let result = await response.json();
+        return result
+    } catch (error) {
+        alert("Hubo un error: ")
+    }
+}
+
+async function llenarDatosPeliculas() {
     let opciones = document.getElementById("opcionesPeliculas").innerHTML
-    for (let i = 0; i < opciones.length; i++) {
-        let opciones =`<option value = ${opciones[i].id_pelicula}>"${opciones[i].titulo}"</option>`
+    let result = await fetchGetAllMovies()
+    for (let i = 0; i < result.length; i++) {
+        opciones += `<option value = ${result[i].id_pelicula}>"${result[i].titulo}"</option>`
     }
     document.getElementById("opcionesPeliculas") = opciones
 }
 
-async function fetchGetAllUsers() {
+async function llenarDatosUsuarios() {
     let opciones = document.getElementById("opcionesUsuarios").innerHTML
-    for (let i = 0; i < opciones.length; i++) {
-        let opciones =`<option value = ${opciones[i].id_usuario}>"${opciones[i].username}"</option>`
+    let result = await fetchGetAllUsers()
+    for (let i = 0; i < result.length; i++) {
+        opciones += `<option value = ${result[i].id_usuario}>"${result[i].username}"</option>`
     }
     document.getElementById("opcionesUsuarios") = opciones
 }
+
+async function fetchPutUsuarios() {
+    try {
+        let datos = {
+            id_usuario: id_usuario,
+            username: username,
+            password: password
+        }
+        response = await fetch(`http://localhost:4000/changeUser`, {
+            method: "PUT", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos)
+        })
+        let result = await response.json();
+        alert("Se modifico")
+        return result
+    } catch (error) {
+        alert("Hubo un error: ")
+
+    }
+}
+
+async function fetchPostUsuarios() {
+    let datos = {
+        username: username,
+        password: password,
+        record: record
+    };
+    try {
+        response = await fetch(`http://localhost:4000/insertUserAdmin`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        });
+        let result = await response.json();
+        console.log(result);
+        return result
+    } catch (error) {
+        alert("Hubo un error: ");
+    }
+}
+
+async function fetchDeleteUsuarios(){
+    let datos = {
+        id_usuario: id_usuario
+    }
+    try {
+        response = await fetch(`http://localhost:4000/deleteUser`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos),
+        });
+        let result = await response.json();
+        console.log(result);
+        return result
+    } catch (error) {
+        alert("Hubo un error: ");
+    }
+}
+
+async function fetchPutPeliculas() {
+    try {
+        let datos = {
+            id_pelicula: id_pelicula,
+            titulo: titulo,
+            ganancia: ganancia,
+            link: link,
+            voto_espectadores: voto_espectadores,
+            año: año
+
+        }
+        response = await fetch(`http://localhost:4000/changeUser`, {
+            method: "PUT", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos)
+        })
+        let result = await response.json();
+        alert("Se modifico")
+        return result
+    } catch (error) {
+        alert("Hubo un error: ")
+
+    }
+}
+
+//El pedido para borrar y añadir peliculas ya están hechos
