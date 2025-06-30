@@ -3,11 +3,61 @@ function getUser() {
     user = document.getElementById("inputUser").value;
     return user
 }
+
 function getPassword() {
     password = document.getElementById("inputPassword").value;
     return password
 }
 
+function getIdPeliculas(){
+    let id_pelicula = document.getElementById("opcionesPeliculas").value
+    return id_pelicula
+}
+
+function getIdUsuario(){
+    let id_usuario = document.getElementById("opcionesUsuarios").value
+    return id_usuario
+}
+
+function getTitle(){
+    let title = document.getElementById("title").value
+    return title
+}
+
+function getGanancia(){
+    let ganancia = document.getElementById("ganancia").value
+    return ganancia
+}
+
+function getVotoEspectadores(){
+    let voto_espectadores = document.getElementById("voto_espectadores").value
+    return voto_espectadores
+}
+
+function getAño(){
+    let año = document.getElementById("año").value
+    return año
+}
+
+function getLink(){
+    let link = document.getElementById("link").value
+    return link
+}
+
+function getUsername(){
+    let username = document.getElementById("username").value
+    return username
+}
+
+function getPasswordAdmin(){
+    let password = document.getElementById("password").value
+    return password
+}
+
+function getRecord(){
+    let record = document.getElementById("record").value
+    return record
+}
 // dom modals
 
 const modalJugar = document.getElementById("modalJugar")//encuentra con el modalid el elemento //Accder al elemento
@@ -15,15 +65,9 @@ const modalRanking = document.getElementById("modalRanking")//encuentra con el m
 const modalSesion1 = document.getElementById("modalSesion1")//encuentra con el modalid el elemento//Accder al elemento
 const modalSesion2 = document.getElementById("modalSesion2")//encuentra con el modalid el elemento//Accder al elemento
 const modalFinal = document.getElementById("modalFinal")//encuentra con el modalid el elemento//Accder al elemento
-const modalAdmin = document.getElementById("modalAdmin")//encuentra con el modalid el elemento//Accder al elemento
-const modalEleccionPeliculas = document.getElementById("modalEleccionPeliculas")
-const modalEleccionUsuarios = document.getElementById("modalEleccionUsuarios")
-const modalAgregarPelicula = document.getElementById("modalAgregarPelicula")
-const modalModificarPelicula = document.getElementById("modalModificarPelicula")
-const modalBorrarPelicula = document.getElementById("modalBorrarPelicula")
-const modalAgregarUsuario = document.getElementById("modalAgregarUsuario")
-const modalModificarUsuario = document.getElementById("modalModificarUsuario")
-const modalBorrarUsuario = document.getElementById("modalBorrarUsuario")
+const modalAdmin = document.getElementById("modalAdmin")
+const administerPelicula = document.getElementById("administerPelicula")
+const administerUser = document.getElementById("administerUser")
 
 //modal cuenta1
 function showModalCuenta() {
@@ -88,57 +132,46 @@ function closeModalFinal() {
 
 
 //modal admin
-function mostrarModalSeleccionOpcionesPeliculas(){
+function openAdministerPelicula(){
+    closemodalAdmin()
+    administerPelicula.showModal()
+}
+
+function openAdministerUser(){
+    closemodalAdmin()
+    administerUser.showModal()
+}
+function openModalAdmin(){
+    modalAdmin.showModal()
+}
+function closeAdministerPelicula(){
+    administerPelicula.close()
+}
+
+function closeAdministerUser(){
+    closemodalAdmin()
+    administerUser.close()
+}
+function closemodalAdmin(){
     modalAdmin.close()
-    modalEleccionPeliculas.showModal()
-}
-
-function mostrarAgregarPelicula(){
-    modalEleccionPeliculas.close()
-    modalAgregarPelicula.showModal()
-}
-
-function mostrarModificarPelicula(){
-    modalEleccionPeliculas.close()
-    modalModificarPelicula.showModal()
-}
-
-function mostrarEliminarPelicula(){
-    modalEleccionPeliculas.close()
-    modalBorrarPelicula.showModal()
-}
-
-function mostrarModalSeleccionOpcionesUsuarios(){
-    modalAdmin.close()
-    modalEleccionUsuarios.showModal()
-}
-
-function mostrarAgregarUsuario(){
-    modalEleccionUsuarios.close()
-    modalAgregarUsuario.showModal()
-}
-
-function mostrarModificarUsuario(){
-    modalEleccionUsuarios.close()
-    modalModificarUsuario.showModal()
-}
-
-function mostrarEliminarUsuario(){
-    modalEleccionUsuarios.close()
-    modalBorrarUsuario.showModal()
 }
 // dom index
 function changeScreen() {
-    if (menu != 0) {
-        document.getElementById("playPart").style.display = ''
-        document.getElementById("mainMenu").style.display = 'none'
-        menu = 0
-    } else {
-        closeModalFinal()
-        document.getElementById("mainMenu").style.display = ''
-        document.getElementById("playPart").style.display = 'none'
-        menu = 1
+    if(id_user<0){
+        if (menu != 0) {
+            document.getElementById("playPart").style.display = ''
+            document.getElementById("mainMenu").style.display = 'none'
+            menu = 0
+        } else {
+            closeModalFinal()
+            document.getElementById("mainMenu").style.display = ''
+            document.getElementById("playPart").style.display = 'none'
+            menu = 1
+        }
+    }else{
+        alert("Inicie Sesion para poder jugar")
     }
+
 }
 
 function replaceSec1(peliculaSec1) {

@@ -165,3 +165,11 @@ function closeAccount() {
     document.getElementById("inputPassword").value = ""
     document.getElementById("puntajePropio").innerText = "Inicia sesión para ver tu puntaje máximo"
 }
+
+async function agregarPeliculas() {
+    if (getTitle() == "" | getLink() == "" | getAño() == "" | getGanancia() == "" | getVotoEspectadores() == "" | getIdPeliculas() == ""){
+        alert("Complete todo los campos para hacer el POST")
+    }else{
+        await fetchPostPeliculas(titulo, voto_espectadores, año, ganancia, link)
+    }
+}

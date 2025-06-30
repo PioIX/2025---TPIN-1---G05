@@ -39,7 +39,7 @@ async function fetchPostPeliculas(titulo, voto_espectadores, año, ganancia, lin
     }
 }
 
-async function fetchBorrarPeliculas(datos) {
+async function fetchBorrarPeliculas(id_pelicula) {
     let datos = {
         id_pelicula: id_pelicula
     };
@@ -212,6 +212,7 @@ async function llenarDatosPeliculas() {
     }
     document.getElementById("opcionesPeliculas") = opciones
 }
+llenarDatosPeliculas()
 
 async function llenarDatosUsuarios() {
     let opciones = document.getElementById("opcionesUsuarios").innerHTML
@@ -221,8 +222,9 @@ async function llenarDatosUsuarios() {
     }
     document.getElementById("opcionesUsuarios") = opciones
 }
+llenarDatosUsuarios()
 
-async function fetchPutUsuarios() {
+async function fetchPutUsuarios(id_usuario, username, password) {
     try {
         let datos = {
             id_usuario: id_usuario,
@@ -245,7 +247,7 @@ async function fetchPutUsuarios() {
     }
 }
 
-async function fetchPostUsuarios() {
+async function fetchPostUsuarios(username, password, record) {
     let datos = {
         username: username,
         password: password,
@@ -267,7 +269,7 @@ async function fetchPostUsuarios() {
     }
 }
 
-async function fetchDeleteUsuarios(){
+async function fetchDeleteUsuarios(id_usuario){
     let datos = {
         id_usuario: id_usuario
     }
@@ -287,7 +289,7 @@ async function fetchDeleteUsuarios(){
     }
 }
 
-async function fetchPutPeliculas() {
+async function fetchPutPeliculas(id_pelicula, titulo, ganancia, link, voto_espectadores) {
     try {
         let datos = {
             id_pelicula: id_pelicula,
