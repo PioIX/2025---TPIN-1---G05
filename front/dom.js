@@ -9,38 +9,54 @@ function getPassword() {
     return password
 }
 
-function getIdPeliculas(){
-    let id_pelicula = document.getElementById("opcionesPeliculas").value
+function getIdPeliculasPut(){
+    let id_pelicula = document.getElementById("opcionesPeliculasPut").value
     return id_pelicula
 }
 
-function getIdUsuario(){
-    let id_usuario = document.getElementById("opcionesUsuarios").value
+function getIdPeliculasDelete(){
+    let id_pelicula = document.getElementById("opcionesPeliculasDelete").value
+    return id_pelicula
+}
+
+function getIdUsuarioPut(){
+    let id_usuario = document.getElementById("opcionesUsuariosPut").value
     return id_usuario
 }
 
-function getTitle(){
-    let title = document.getElementById("title").value
+function getIdUsuarioDelete(){
+    let id_usuario = document.getElementById("opcionesUsuariosDelete").value
+    return id_usuario
+}
+
+
+function getTitlePost(){
+    let title = document.getElementById("titlePost").value
     return title
 }
 
-function getGanancia(){
-    let ganancia = document.getElementById("ganancia").value
+function getTitlePut(){
+    let title = document.getElementById("titlePut").value
+    return title
+}
+
+function getGananciaPut(){
+    let ganancia = document.getElementById("gananciaPut").value
     return ganancia
 }
 
-function getVotoEspectadores(){
-    let voto_espectadores = document.getElementById("voto_espectadores").value
+function getVotoEspectadoresPut(){
+    let voto_espectadores = document.getElementById("voto_espectadoresPut").value
     return voto_espectadores
 }
 
-function getAño(){
-    let año = document.getElementById("año").value
+function getAñoPut(){
+    let año = document.getElementById("añoPut").value
     return año
 }
 
-function getLink(){
-    let link = document.getElementById("link").value
+function getLinkPut(){
+    let link = document.getElementById("linkPut").value
     return link
 }
 
@@ -68,6 +84,12 @@ const modalFinal = document.getElementById("modalFinal")//encuentra con el modal
 const modalAdmin = document.getElementById("modalAdmin")
 const administerPelicula = document.getElementById("administerPelicula")
 const administerUser = document.getElementById("administerUser")
+const deletePeliculas = document.getElementById("borrarPelicula")
+const putPeliculas = document.getElementById("modificarPelicula")
+const postPeliculas =document.getElementById("agregarPelicula")
+const deleteUsuarios = document.getElementById("borrarUsuario")
+const putUsuarios = document.getElementById("modificarUsuario")
+const postUsuarios = document.getElementById("agregarUsuario")
 
 //modal cuenta1
 function showModalCuenta() {
@@ -149,15 +171,73 @@ function closeAdministerPelicula(){
 }
 
 function closeAdministerUser(){
-    closemodalAdmin()
     administerUser.close()
 }
 function closemodalAdmin(){
     modalAdmin.close()
 }
+
+async function openPutPeliculas(){
+    administerPelicula.close()
+    putPeliculas.showModal()
+    await llenarDatosPeliculasPut()
+}
+
+function closeDeletePeliculas(){
+    deletePeliculas.close()
+}
+
+async function openDeletePeliculas(){
+    administerPelicula.close()
+    putPeliculas.showModal()
+    await llenarDatosPeliculasDelete()
+}
+
+function closePutPeliculas(){
+    putPeliculas.close()
+}
+
+function openPostPeliculas(){
+    administerPelicula.close()
+    postPeliculas.showModal()
+}
+
+function closePostPeliculas(){
+    postPeliculas.close()
+}
+
+async function openDeleteUsuarios(){
+    administerUser.close()
+    deleteUsuarios.showModal()
+    await llenarDatosUsuariosDelete()
+}
+
+function closeDeleteUsuarios(){
+    deleteUsuarios.close()
+}
+
+async function openPutUsuarios(){
+    administerUser.close()
+    putUsuarios.showModal()
+    await llenarDatosUsuariosPut()
+}
+
+function closePutUsuarios(){
+    putUsuarios.close()
+}
+
+function openPostUsuarios(){
+    administerUser.close()
+    postUsuarios.showModal()
+}
+
+function closePostUsuarios(){
+    postUsuarios.close()
+}
+
 // dom index
 function changeScreen() {
-    if(id_user<0){
+    if(id_user>0){
         if (menu != 0) {
             document.getElementById("playPart").style.display = ''
             document.getElementById("mainMenu").style.display = 'none'

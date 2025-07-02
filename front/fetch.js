@@ -204,32 +204,53 @@ async function fetchGetAllUsers() {
     }
 }
 
-async function llenarDatosPeliculas() {
-    let opciones = document.getElementById("opcionesPeliculas").innerHTML
+async function llenarDatosPeliculasPut() {
+    let opciones = document.getElementById("opcionesPeliculasPut").innerHTML
     let result = await fetchGetAllMovies()
     for (let i = 0; i < result.length; i++) {
         opciones += `<option value = ${result[i].id_pelicula}>"${result[i].titulo}"</option>`
     }
-    document.getElementById("opcionesPeliculas") = opciones
+    document.getElementById("opcionesPeliculasPut").innerHTML = opciones
 }
-llenarDatosPeliculas()
 
-async function llenarDatosUsuarios() {
-    let opciones = document.getElementById("opcionesUsuarios").innerHTML
-    let result = await fetchGetAllUsers()
+async function llenarDatosPeliculasDelete() {
+    let opciones = document.getElementById("opcionesPeliculasDelete").innerHTML
+    let result = await fetchGetAllMovies()
     for (let i = 0; i < result.length; i++) {
-        opciones += `<option value = ${result[i].id_usuario}>"${result[i].username}"</option>`
+        opciones += `<option value = ${result[i].id_pelicula}>"${result[i].titulo}"</option>`
     }
-    document.getElementById("opcionesUsuarios") = opciones
+    document.getElementById("opcionesPeliculasDelete").innerHTML = opciones
 }
-llenarDatosUsuarios()
 
-async function fetchPutUsuarios(id_usuario, username, password) {
+async function llenarDatosUsuariosPut() {
+    let opciones = document.getElementById("opcionesUsuariosPut").innerHTML
+    let result = await fetchGetAllUsers()
+    console.log(result)
+    for (let i = 0; i < result.length; i++) {
+        opciones += `<option value = ${result[i].id_usuario}>${result[i].username}</option>`
+    }
+    console.log(opciones)
+    document.getElementById("opcionesUsuariosPut").innerHTML = opciones
+}
+
+async function llenarDatosUsuariosDelete() {
+    let opciones = document.getElementById("opcionesUsuariosDelete").innerHTML
+    let result = await fetchGetAllUsers()
+    console.log(result)
+    for (let i = 0; i < result.length; i++) {
+        opciones += `<option value = ${result[i].id_usuario}>${result[i].username}</option>`
+    }
+    console.log(opciones)
+    document.getElementById("opcionesUsuariosDelete").innerHTML = opciones
+}
+
+async function fetchPutUsuarios(id_usuario, username, password, record) {
     try {
         let datos = {
             id_usuario: id_usuario,
             username: username,
-            password: password
+            password: password,
+            record: record
         }
         response = await fetch(`http://localhost:4000/changeUser`, {
             method: "PUT", //GET, POST, PUT o DELETE
@@ -289,7 +310,7 @@ async function fetchDeleteUsuarios(id_usuario){
     }
 }
 
-async function fetchPutPeliculas(id_pelicula, titulo, ganancia, link, voto_espectadores) {
+async function fetchPutPeliculas(id_pelicula, titulo, ganancia, link, voto_espectadores, año) {
     try {
         let datos = {
             id_pelicula: id_pelicula,

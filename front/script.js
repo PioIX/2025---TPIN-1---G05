@@ -167,9 +167,50 @@ function closeAccount() {
 }
 
 async function agregarPeliculas() {
-    if (getTitle() == "" | getLink() == "" | getAño() == "" | getGanancia() == "" | getVotoEspectadores() == "" | getIdPeliculas() == ""){
+    if (getTitle() == "" | getLink() == "" | getAño() == "" | getGanancia() == "" | getVotoEspectadores() == ""){
         alert("Complete todo los campos para hacer el POST")
     }else{
-        await fetchPostPeliculas(titulo, voto_espectadores, año, ganancia, link)
+        await fetchPostPeliculas(getTitle(), getVotoEspectadores(), getAño(), getGanancia(), getLink())
+    }
+}
+
+async function modificarPeliculas() {
+    if (getTitle() == "" | getLink() == "" | getAño() == "" | getGanancia() == "" | getVotoEspectadores() == "" | getIdPeliculas() == ""){
+        alert("Complete todo los campos para hacer el Put")
+    }else{
+        await fetchPutPeliculas(getIdPeliculasPut(), getTitle(), getVotoEspectadores(), getAño(), getGanancia(), getLink())
+    }
+}
+
+async function borrarPeliculas() {
+    if (getIdPeliculas() == ""){
+        alert("Seleccione la película a eliminar")
+    }else{
+        await fetchBorrarPeliculas(getIdPeliculasDelete())
+    }
+}
+
+async function agregarUsuarios() {
+    if (getUsername() == "" | getPasswordAdmin() == "" | getRecord() == ""){
+        alert("Complete todo los campos para hacer el POST")
+    }else{
+        await fetchPostUsuarios(getUsername(), getPasswordAdmin(), getRecord())
+        alert("Usuario agregado")
+    }
+}
+
+async function modificarUsuarios() {
+    if (getUsername() == "" | getPasswordAdmin() == "" | getRecord() == ""| getIdUsuario() == ""){
+        alert("Complete todo los campos para hacer el PUT")
+    }else{
+        await fetchPutUsuarios(getIdUsuarioPut(), getUsername(), getPassword(), getRecord())
+    }
+}
+
+async function borrarUsuarios() {
+    if (getIdUsuarios() == ""){
+        alert("Seleccione el usuario a eliminar")
+    }else{
+        await fetchPutPeliculas(getIdUsuarioDelete())
     }
 }

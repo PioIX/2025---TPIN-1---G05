@@ -85,30 +85,64 @@
         </dialog>
         <dialog id="modalAdmin" class="modal">
             <button class="closeButton" onclick="closeModalAdmin()">X</button>
-            <button onclick="openAdministerUser()">Peliculas</button>
-            <button onclick="openAdministerPelicula()">Usuarios</button>
+            <button onclick="openAdministerPelicula()">Peliculas</button>
+            <button onclick="openAdministerUser()">Usuarios</button>
         </dialog>
         <dialog id="administerPelicula" class="modal">
             <button class="closeButton" onclick="closeAdministerPelicula()">X</button>
-            <select name="modificarPelicula" id="opcionesPeliculas"></select>
-            <input type="text" id="title">
-            <input type="number" id="ganancia">
-            <input type="number" id="voto_espectadores">
-            <input type="number" id="año">
-            <input type="text" id="link">
-            <button onclick="FF()">Modificar</button>
-            <button onclick="FF()">Agregar</button>
-            <button onclick="FF()">Borrar</button>
+            <button onclick="openPostPeliculas()">Agregar</button>
+            <button onclick="openPutPeliculas()">Modificar</button>
+            <button onclick="openDeletePeliculas()">Borrar</button>
+        </dialog>
+        <dialog id="borrarPelicula" class="modal">
+            <button class="closeButton" onclick="closeDeletePeliculas()">X</button>
+            <select name="deletePelicula" id="opcionesPeliculasDelete"></select>
+            <button onclick="borrarPeliculas()">Borrar</button>
+        </dialog>
+        <dialog id="modificarPelicula" class="modal">
+            <button class="closeButton" onclick="closePutPeliculas()">X</button>
+            <select name="putPelicula" id="opcionesPeliculasPut"></select>
+            <input type="text" id="title" placeholder="Ingrese el titulo">
+            <input type="number" id="ganancia" placeholder="Ingrese la ganancia">
+            <input type="number" id="voto_espectadores" placeholder="Ingrese el voto de la audiencia">
+            <input type="text" id="link" placeholder="Ingrese el link">
+            <input type="number" id="año" placeholder="Ingrese el año">
+            <button onclick="modificarPeliculas()">Modificar</button>
+        </dialog>
+        <dialog id="agregarPelicula" class="modal">
+            <button class="closeButton" onclick="closePostPeliculas()">X</button>
+            <input type="text" id="titlePost" placeholder="Ingrese el titulo">
+            <input type="number" id="gananciaPost" placeholder="Ingrese la ganancia">
+            <input type="number" id="voto_espectadoresPost" placeholder="Ingrese el voto de la audiencia">
+            <input type="text" id="linkPost" placeholder="Ingrese el link">
+            <input type="number" id="añoPost" placeholder="Ingrese el año">
+            <button onclick="agregarPeliculas()">Agregar</button>
         </dialog>
         <dialog id="administerUser" class="modal">
             <button class="closeButton" onclick="closeAdministerUser()">X</button>
-            <select name="modificarUsuario" id="opcionesUsuarios"></select>
-            <input type="text" id="username">
-            <input type="text" id="password">
-            <input type="number" id="record">
-            <button onclick="FF()">Modificar</button>
-            <button onclick="FF()">Agregar</button>
-            <button onclick="FF()">Borrar</button>
+            <button onclick="openPutUsuarios()">Modificar</button>
+            <button onclick="openPostUsuarios()">Agregar</button>
+            <button onclick="openDeleteUsuarios()">Borrar</button>
+        </dialog>
+        <dialog id="borrarUsuario" class="modal">
+            <button class="closeButton" onclick="closeDeleteUsuarios()">X</button>
+            <select name="deleteUsuario" id="opcionesUsuariosDelete"></select>
+            <button onclick="borrarUsuarios()">Borrar</button>
+        </dialog>
+        <dialog id="modificarUsuario" class="modal">
+            <button class="closeButton" onclick="closePutUsuarios()">X</button>
+            <select name="putUsuario" id="opcionesUsuariosPut"></select>
+            <input type="text" id="username" placeholder="Ingrese el nombre de usuario">
+            <input type="text" id="password" placeholder="Ingrese la contraseña">
+            <input type="number" id="record" placeholder="Ingrese el record">
+            <button onclick="modificarUsuarios()">Modificar</button>
+        </dialog>
+        <dialog id="agregarUsuario" class="modal">
+            <button class="closeButton" onclick="closePostUsuarios()">X</button>
+            <input type="text" id="username" placeholder="Ingrese el nombre de usuario">
+            <input type="text" id="password" placeholder="Ingrese la contraseña">
+            <input type="number" id="record" placeholder="Ingrese el record">
+            <button onclick="agregarUsuarios()">Agregar</button>
         </dialog>
     </section>
     <section id="playPart" style="display: none;">
