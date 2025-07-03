@@ -14,13 +14,13 @@ async function fetchGetPeliculas(id_pelicula, parametro) {
 
 }
 
-async function fetchPostPeliculas(titulo, voto_espectadores, año, ganancia, link) {
+async function fetchPostPeliculas(titulo, ganancia, link, voto_espectadores, año) {
     let datos = {
         titulo: titulo,
-        voto_espectadores: voto_espectadores,
-        año: año,
         ganancia: ganancia,
-        link: link
+        link: link,
+        voto_espectadores: voto_espectadores,
+        año: año
     };
     try {
         response = await fetch(`http://localhost:4000/insertarPeliculas`, {
@@ -321,7 +321,7 @@ async function fetchPutPeliculas(id_pelicula, titulo, ganancia, link, voto_espec
             año: año
 
         }
-        response = await fetch(`http://localhost:4000/changeUser`, {
+        response = await fetch(`http://localhost:4000/changeMovie`, {
             method: "PUT", //GET, POST, PUT o DELETE
             headers: {
                 "Content-Type": "application/json",

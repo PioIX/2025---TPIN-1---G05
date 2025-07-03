@@ -29,7 +29,6 @@ function getIdUsuarioDelete(){
     return id_usuario
 }
 
-
 function getTitlePost(){
     let title = document.getElementById("titlePost").value
     return title
@@ -45,8 +44,18 @@ function getGananciaPut(){
     return ganancia
 }
 
+function getGananciaPost(){
+    let ganancia = document.getElementById("gananciaPost").value
+    return ganancia
+}
+
 function getVotoEspectadoresPut(){
     let voto_espectadores = document.getElementById("voto_espectadoresPut").value
+    return voto_espectadores
+}
+
+function getVotoEspectadoresPost(){
+    let voto_espectadores = document.getElementById("voto_espectadoresPost").value
     return voto_espectadores
 }
 
@@ -55,23 +64,48 @@ function getAñoPut(){
     return año
 }
 
+function getAñoPost(){
+    let año = document.getElementById("añoPost").value
+    return año
+}
+
 function getLinkPut(){
     let link = document.getElementById("linkPut").value
     return link
 }
 
-function getUsername(){
-    let username = document.getElementById("username").value
+function getLinkPost(){
+    let link = document.getElementById("linkPost").value
+    return link
+}
+
+function getUsernamePut(){
+    let username = document.getElementById("usernamePut").value
     return username
 }
 
-function getPasswordAdmin(){
-    let password = document.getElementById("password").value
+function getUsernamePost(){
+    let username = document.getElementById("usernamePost").value
+    return username
+}
+
+function getPasswordAdminPut(){
+    let password = document.getElementById("passwordPut").value
     return password
 }
 
-function getRecord(){
-    let record = document.getElementById("record").value
+function getPasswordAdminPost(){
+    let password = document.getElementById("passwordPost").value
+    return password
+}
+
+function getRecordPut(){
+    let record = document.getElementById("recordPut").value
+    return record
+}
+
+function getRecordPost(){
+    let record = document.getElementById("recordPost").value
     return record
 }
 // dom modals
@@ -189,7 +223,7 @@ function closeDeletePeliculas(){
 
 async function openDeletePeliculas(){
     administerPelicula.close()
-    putPeliculas.showModal()
+    deletePeliculas.showModal()
     await llenarDatosPeliculasDelete()
 }
 

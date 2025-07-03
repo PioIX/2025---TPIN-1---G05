@@ -97,8 +97,8 @@ app.post('/insertarPeliculas', async function (req, res) {
     try {
         let check = await realizarQuery(`SELECT * FROM Peliculas WHERE titulo = "${req.body.titulo}" AND año =${req.body.año}`)
         if (check.length == 0) {
-            await realizarQuery(` INSERT INTO Peliculas (titulo, voto_espectadores, ganancia, link, año )
-                VALUES ("${req.body.titulo}", ${req.body.voto_espectadores}, ${req.body.ganancia}, "${req.body.link}", ${req.body.año});`)
+            await realizarQuery(` INSERT INTO Peliculas (titulo, ganancia, link, voto_espectadores, año )
+                VALUES ("${req.body.titulo}", ${req.body.ganancia}, "${req.body.link}", ${req.body.voto_espectadores}, ${req.body.año});`)
             res.send({ mensaje: "Pelicula agregada correctamente" });
         }
         else {
@@ -270,7 +270,7 @@ app.get('/getAllMovies', async function (req, res) {
 
 app.put('/changeMovie', async function (req, res) {
     try {
-        await realizarQuery(`UPDATE Peliculas SET titulo = "${req.body.titulo}", voto_espectadores = "${req.body.voto_espectadores}", ganancia = "${req.body.ganancia}", link = "${req.body.link}", año = ${req.body.año} WHERE id_pelicula = "${req.body.id_pelicula}"`)
+        await realizarQuery(`UPDATE Peliculas SET titulo = "${req.body.titulo}", ganancia = "${req.body.ganancia}", link = "${req.body.link}", voto_espectadores = "${req.body.voto_espectadores}", año = ${req.body.año} WHERE id_pelicula = "${req.body.id_pelicula}"`)
         res.send("Se ha cambiado la pelicula")
     } catch (error) {
         res.send({ mensaje: "Tuviste un error", error: error.message })
